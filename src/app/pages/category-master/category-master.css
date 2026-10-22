@@ -1,0 +1,212 @@
+.brand-light {
+  color: #9eacc1;
+  font-weight: 400;
+}
+
+.master-count {
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: #fff;
+  color: #8390a2;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.master-count strong {
+  color: #364960;
+}
+
+.create-card {
+  margin-bottom: 21px;
+  padding: 21px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 20px;
+}
+
+.section-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 9px;
+  background: #edf2ff;
+  color: #4564d0;
+  font-size: 20px;
+}
+
+.section-heading h2,
+.section-heading p {
+  margin: 0;
+}
+
+.section-heading h2 {
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.section-heading p {
+  margin-top: 4px;
+  color: #8794a6;
+  font-size: 10px;
+}
+
+.required-mark {
+  color: #df5f67;
+}
+
+.optional-note {
+  color: #99a4b2;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.create-card .form-control {
+  min-height: 40px;
+  font-size: 11px;
+}
+
+.create-card .btn {
+  min-height: 40px;
+  padding: 7px 10px;
+  white-space: nowrap;
+}
+
+.category-list-card {
+  overflow: hidden;
+}
+
+.category-list-card .table-toolbar {
+  padding: 20px;
+}
+
+.table-toolbar h2 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.table-toolbar p {
+  margin: 0;
+  color: #8995a6;
+  font-size: 11px;
+}
+
+.category-search {
+  width: min(250px, 45%);
+  height: 36px;
+}
+
+.category-search input {
+  font-size: 10px;
+}
+
+.master-table td {
+  color: #718096;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.master-table td:first-child {
+  min-width: 110px;
+}
+
+.master-table td .category-name {
+  color: #35465d;
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.category-id {
+  display: inline-block;
+  padding: 5px 8px;
+  border: 1px solid #e7ecf2;
+  border-radius: 6px;
+  background: #f8fafd;
+  color: #607089;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+}
+
+.active-label,
+.inactive-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  color: #39885e;
+  font-size: 10px;
+}
+
+.active-label {
+  background: #e9f7ef;
+}
+
+.active-label i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #48ae76;
+}
+
+.inactive-label {
+  background: #eff1f4;
+  color: #8994a3;
+}
+
+.action-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.action-divider {
+  margin: 0 7px;
+  color: #bec6d0;
+}
+
+.muted-action {
+  color: #8a96a6;
+}
+
+.master-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-top: 1px solid #edf1f6;
+  color: #8995a6;
+  font-size: 10px;
+}
+
+.master-footer a {
+  color: #4564c9;
+  font-weight: 600;
+}
+
+@media (max-width: 575.98px) {
+  .page-heading {
+    flex-direction: column;
+  }
+
+  .create-card {
+    padding: 17px;
+  }
+
+  .category-list-card .table-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .category-search {
+    width: 100%;
+  }
+}

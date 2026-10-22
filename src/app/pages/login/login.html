@@ -1,0 +1,64 @@
+<main class="login-page container-fluid">
+  <div class="row min-vh-100">
+    <section class="col-lg-6 login-story d-none d-lg-flex">
+      <div class="story-content">
+        <a class="brand-lockup" href="/home">
+          <span class="brand-mark">in</span>
+          <span>inquiry<span class="brand-light">desk</span></span>
+        </a>
+        <div class="story-copy">
+          <span class="eyebrow">A clearer way to help</span>
+          <h1>Every conversation,<br>moving forward.</h1>
+          <p>Keep customer questions organized, visible, and on their way to a helpful answer.</p>
+        </div>
+        <div class="story-foot">Simple, thoughtful support starts here.</div>
+      </div>
+      <div class="story-orb orb-one"></div>
+      <div class="story-orb orb-two"></div>
+    </section>
+
+    <section class="col-12 col-lg-6 login-panel">
+      <div class="login-card">
+        <a class="brand-lockup mobile-brand d-lg-none" href="/home">
+          <span class="brand-mark">in</span>
+          <span>inquiry<span class="brand-light">desk</span></span>
+        </a>
+        <div class="login-heading">
+          <span class="eyebrow">ADMINISTRATOR PORTAL</span>
+          <h2>Welcome back</h2>
+          <p>Sign in to manage your customer inquiries.</p>
+        </div>
+
+        <form>
+          <div class="mb-3">
+            <label class="form-label" for="admin-email">Email address</label>
+            <input class="form-control" id="admin-email" type="email"
+              [(ngModel)]="userLogin.userName"
+              name="userName"
+             placeholder="you@company.com" autocomplete="username">
+          </div>
+          <div class="mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <label class="form-label" for="admin-password">Password</label>
+              <a class="subtle-link" href="#">Forgot password?</a>
+            </div>
+            <input class="form-control" id="admin-password" type="password" placeholder="Enter your password"
+            
+            [(ngModel)]="userLogin.password"
+              name="password" autocomplete="current-password">
+          </div>
+          <div class="form-check my-4">
+            <input class="form-check-input" id="remember-me" type="checkbox">
+            <label class="form-check-label" for="remember-me">Keep me signed in</label>
+          </div>
+          <button class="btn btn-primary w-100 login-submit" type="button"
+          (click)="onLogin()">Sign in to dashboard <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="login-divider"><span>Need help?</span></div>
+        <p class="login-help">Contact your workspace administrator for access.</p>
+        <a class="public-link" href="/home">Submit a customer inquiry <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="login-footer">© 2026 InquiryDesk <span>·</span> Secure administrator access</div>
+    </section>
+  </div>
+</main>

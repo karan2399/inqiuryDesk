@@ -1,0 +1,61 @@
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <a class="brand-lockup" routerLink="/home"><span class="brand-mark">in</span><span>inquiry<span class="brand-light">desk</span></span></a>
+    <div class="sidebar-label">Workspace</div>
+    <nav class="admin-nav" aria-label="Admin navigation">
+      <a class="active" routerLink="/enquiry-list"><span class="nav-icon">▤</span>Inquiries</a>
+      <a routerLink="/category"><span class="nav-icon">◈</span>Categories</a>
+      <a routerLink="/status"><span class="nav-icon">◷</span>Statuses</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-user"><span class="user-avatar">JD</span><span>Jordan Davis<br><small>Administrator</small></span></div>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <span class="breadcrumb-label">Workspace&nbsp; / &nbsp;<strong>Inquiries</strong></span>
+      <div class="topbar-right"><span>Thursday, October 22</span><span class="user-avatar">JD</span></div>
+    </header>
+    <main class="admin-content">
+      <div class="page-heading">
+        <div><h1>Inquiries</h1><p>Review and manage messages from your customers.</p></div>
+        <a class="btn btn-light" href="/home">↗&nbsp; View customer form</a>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-blue">▤</span><div><span class="metric-label">Total inquiries</span><strong>248</strong></div><span class="metric-note">All time</span></div></div>
+        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-amber">◷</span><div><span class="metric-label">Needs attention</span><strong>18</strong></div><span class="metric-note">Open</span></div></div>
+        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-violet">◌</span><div><span class="metric-label">In progress</span><strong>12</strong></div><span class="metric-note">Being handled</span></div></div>
+        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-green">✓</span><div><span class="metric-label">Resolved</span><strong>218</strong></div><span class="metric-note">87.9% of total</span></div></div>
+      </div>
+
+      <section class="card-surface inquiry-table-card">
+        <div class="table-toolbar">
+          <div><h2>All inquiries</h2><p>Browse and update customer requests.</p></div>
+          <span class="record-count">248 records</span>
+        </div>
+        <div class="filter-row row g-2">
+          <div class="col-12 col-lg-5"><div class="search-box"><span>⌕</span><input type="search" aria-label="Search inquiries" placeholder="Search by name, subject or email"></div></div>
+          <div class="col-6 col-lg-3"><select class="form-select" aria-label="Filter by category"><option>All categories</option><option>Billing &amp; payments</option><option>Product support</option><option>Account &amp; access</option></select></div>
+          <div class="col-6 col-lg-2"><select class="form-select" aria-label="Filter by status"><option>All statuses</option><option>Open</option><option>In progress</option><option>Resolved</option></select></div>
+          <div class="col-12 col-lg-2"><button class="btn btn-light filter-button" type="button">More filters <span>⌄</span></button></div>
+        </div>
+        <div class="table-responsive">
+          <table class="table inquiry-table">
+            <thead><tr><th>Customer</th><th>Subject</th><th>Category</th><th>Received</th><th>Status</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Olivia Rhye</strong><small>olivia.rhye@email.com</small></td><td>Unable to update billing details</td><td>Billing</td><td>Oct 22, 2025</td><td><span class="status-pill open">Open</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              <tr><td><strong>Phoenix Baker</strong><small>phoenix.b@email.com</small></td><td>Login code never arrived</td><td>Account</td><td>Oct 22, 2025</td><td><span class="status-pill progress">In progress</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              <tr><td><strong>Lana Steiner</strong><small>lana.steiner@email.com</small></td><td>Question about my recent order</td><td>General</td><td>Oct 21, 2025</td><td><span class="status-pill open">Open</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              <tr><td><strong>Demi Wilkinson</strong><small>demi.w@email.com</small></td><td>Feature request: team notifications</td><td>Product</td><td>Oct 21, 2025</td><td><span class="status-pill resolved">Resolved</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              <tr><td><strong>Candice Wu</strong><small>candice.wu@email.com</small></td><td>Refund for duplicate payment</td><td>Billing</td><td>Oct 20, 2025</td><td><span class="status-pill progress">In progress</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              <tr><td><strong>Natali Craig</strong><small>natali.c@email.com</small></td><td>How do I change my account email?</td><td>Account</td><td>Oct 20, 2025</td><td><span class="status-pill closed">Closed</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-pagination"><span>Showing <strong>1–6</strong> of <strong>248</strong> inquiries</span><div><button type="button" class="btn btn-light" aria-label="Previous page">←</button><button type="button" class="btn btn-light current-page">1</button><button type="button" class="btn btn-light">2</button><button type="button" class="btn btn-light">3</button><span class="pagination-dots">…</span><button type="button" class="btn btn-light">42</button><button type="button" class="btn btn-light" aria-label="Next page">→</button></div></div>
+      </section>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="public-page">
+  <header class="public-header container">
+    <a class="brand-lockup" href="/home">
+      <span class="brand-mark">in</span>
+      <span class="public-brand-name">inquiry<span class="brand-light">desk</span></span>
+    </a>
+    <div class="public-header-note"><span class="secure-dot"></span> We usually reply within one business day</div>
+  </header>
+
+  <main class="container inquiry-main">
+    <div class="row justify-content-center">
+      <section class="col-12 col-lg-10 col-xl-9">
+        <div class="inquiry-intro">
+          <span class="eyebrow">WE’RE HERE TO HELP</span>
+          <h1>How can we help you?</h1>
+          <p>Tell us a little about what you need and the right person on our team will get back to you.</p>
+        </div>
+
+        <div class="card-surface inquiry-card">
+          <div class="inquiry-card-heading">
+            <div>
+              <h2>Submit an inquiry</h2>
+              <p>Fields marked with <span class="required-mark">*</span> are required.</p>
+            </div>
+            <div class="step-marker"><span>1</span> Your details</div>
+          </div>
+          <form>
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="customer-name">Full name <span class="required-mark">*</span></label>
+                <input class="form-control" id="customer-name" type="text" placeholder="e.g. Alex Morgan" autocomplete="name">
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="customer-email">Email address <span class="required-mark">*</span></label>
+                <input class="form-control" id="customer-email" type="email" placeholder="you@example.com" autocomplete="email">
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="customer-phone">Phone number <span class="optional-note">(optional)</span></label>
+                <input class="form-control" id="customer-phone" type="tel" placeholder="+1 (555) 000-0000" autocomplete="tel">
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label" for="inquiry-category">Inquiry category <span class="required-mark">*</span></label>
+                <select class="form-select" id="inquiry-category">
+                  <option value="" selected disabled>Select a category</option>
+                  <option>Billing &amp; payments</option>
+                  <option>Product support</option>
+                  <option>Account &amp; access</option>
+                  <option>Other question</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="inquiry-subject">Subject <span class="required-mark">*</span></label>
+                <input class="form-control" id="inquiry-subject" type="text" placeholder="A short summary of your inquiry">
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="inquiry-message">How can we help? <span class="required-mark">*</span></label>
+                <textarea class="form-control inquiry-message" id="inquiry-message" rows="5" placeholder="Share any details that will help us understand your question..."></textarea>
+                <div class="field-hint">Please don’t include sensitive payment or account passwords.</div>
+              </div>
+              <div class="col-12 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 inquiry-submit-row">
+                <span class="privacy-note"><span aria-hidden="true">◇</span> Your information is only shared with our support team.</span>
+                <button class="btn btn-primary submit-inquiry" type="button">Send inquiry <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <footer class="public-footer">Already part of our team? <a href="/login">Administrator sign in</a></footer>
+      </section>
+    </div>
+  </main>
+</div>
