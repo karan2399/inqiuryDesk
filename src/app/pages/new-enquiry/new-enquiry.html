@@ -25,41 +25,85 @@
             <div class="step-marker"><span>1</span> Your details</div>
           </div>
           <form>
-            <div class="row g-3">
-              <div class="col-12 col-md-6">
-                <label class="form-label" for="customer-name">Full name <span class="required-mark">*</span></label>
-                <input class="form-control" id="customer-name" type="text" placeholder="e.g. Alex Morgan" autocomplete="name">
+            <div class="form-section">
+              <div class="form-section-heading">
+                <span class="form-section-number">01</span>
+                <div>
+                  <h3>Customer details</h3>
+                  <p>How can we get in touch with you?</p>
+                </div>
               </div>
-              <div class="col-12 col-md-6">
-                <label class="form-label" for="customer-email">Email address <span class="required-mark">*</span></label>
-                <input class="form-control" id="customer-email" type="email" placeholder="you@example.com" autocomplete="email">
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="customer-name">Customer name <span
+                      class="required-mark">*</span></label>
+                  <input class="form-control" id="customer-name" [formField]="inqiryForm.customerName" type="text"
+                    placeholder="e.g. Alex Morgan" autocomplete="name">
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="customer-email">Customer email <span
+                      class="required-mark">*</span></label>
+                  <input class="form-control" id="customer-email" [formField]="inqiryForm.customerEmail" type="email"
+                    placeholder="you@example.com" autocomplete="email">
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="customer-phone">Customer phone <span
+                      class="optional-note">(optional)</span></label>
+                  <input class="form-control" id="customer-phone" [formField]="inqiryForm.customerPhone" type="tel"
+                    placeholder="+1 (555) 000-0000" autocomplete="tel">
+                </div>
+                <div class="col-12">
+                  <label class="form-label" for="inquiry-message">Message <span class="required-mark">*</span></label>
+                  <textarea
+                       [formField]="inqiryForm.message"
+                        class="form-control inquiry-message" id="inquiry-message" rows="5"
+                    placeholder="Share any details that will help us understand your question..."></textarea>
+                  <div class="field-hint">Please don’t include sensitive payment or account passwords.</div>
+                </div>
               </div>
-              <div class="col-12 col-md-6">
-                <label class="form-label" for="customer-phone">Phone number <span class="optional-note">(optional)</span></label>
-                <input class="form-control" id="customer-phone" type="tel" placeholder="+1 (555) 000-0000" autocomplete="tel">
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-heading">
+                <span class="form-section-number">02</span>
+                <div>
+                  <h3>Inquiry details</h3>
+                  <p>Classify your inquiry so it reaches the right team.</p>
+                </div>
               </div>
-              <div class="col-12 col-md-6">
-                <label class="form-label" for="inquiry-category">Inquiry category <span class="required-mark">*</span></label>
-                <select class="form-select" id="inquiry-category">
-                  <option value="" selected disabled>Select a category</option>
-                  <option>Billing &amp; payments</option>
-                  <option>Product support</option>
-                  <option>Account &amp; access</option>
-                  <option>Other question</option>
-                </select>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="category-id">Category <span class="required-mark">*</span></label>
+                  <select class="form-select" id="category-id" [formField]="inqiryForm.categoryId">
+                    <option value="0" selected disabled>Select a category</option>
+                    @for(category of categoryList(); track category.categoryId){
+                            <option [value]="category.categoryId">{{category.categoryName}}</option> 
+                    }
+                  </select>
+                  <div class="field-hint">Choose a category for this inquiry.</div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="status-id">Status</label>
+                  <select class="form-select" id="status-id" [formField]="inqiryForm.statusId">
+                    <option value="0" selected disabled>Select a status</option>
+                    <option value="1">Open</option>
+                    <option value="2">In progress</option>
+                    <option value="3">Resolved</option>
+                    <option value="4">Closed</option>
+                  </select>
+                </div>
               </div>
-              <div class="col-12">
-                <label class="form-label" for="inquiry-subject">Subject <span class="required-mark">*</span></label>
-                <input class="form-control" id="inquiry-subject" type="text" placeholder="A short summary of your inquiry">
-              </div>
-              <div class="col-12">
-                <label class="form-label" for="inquiry-message">How can we help? <span class="required-mark">*</span></label>
-                <textarea class="form-control inquiry-message" id="inquiry-message" rows="5" placeholder="Share any details that will help us understand your question..."></textarea>
-                <div class="field-hint">Please don’t include sensitive payment or account passwords.</div>
-              </div>
-              <div class="col-12 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 inquiry-submit-row">
-                <span class="privacy-note"><span aria-hidden="true">◇</span> Your information is only shared with our support team.</span>
-                <button class="btn btn-primary submit-inquiry" type="button">Send inquiry <span aria-hidden="true">→</span></button>
+            </div>
+
+
+            <div class="row">
+              <div
+                class="col-12 d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3 inquiry-submit-row">
+                <span class="privacy-note"><span aria-hidden="true">◇</span> Your information is only shared with our
+                  support team.</span>
+                <button class="btn btn-primary submit-inquiry" type="button"
+                (click)="onSaveInquiry()">Send inquiry <span
+                    aria-hidden="true">→</span></button>
               </div>
             </div>
           </form>

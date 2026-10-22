@@ -72,10 +72,42 @@
   font-size: 11px;
 }
 
+.create-card .status-id-input {
+  background: #f8fafd;
+  color: #718096;
+}
+
+.status-active-control {
+  display: flex;
+  min-height: 40px;
+  align-items: center;
+}
+
+.status-active-control .form-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 2.5em;
+  white-space: nowrap;
+}
+
+.status-active-control .form-check-input {
+  margin-top: 0;
+}
+
+.status-active-control .form-check-label {
+  color: #718096;
+  font-size: 11px;
+}
+
 .create-card .btn {
   min-height: 40px;
   padding: 7px 10px;
   white-space: nowrap;
+}
+
+.status-form-actions .btn {
+  min-width: 120px;
 }
 
 .status-list-card {
@@ -116,17 +148,62 @@
   white-space: nowrap;
 }
 
-.inquiry-number {
-  color: #3c4e66;
+.master-table td .status-name {
+  color: #35465d;
   font-size: 11px;
+  font-weight: 650;
 }
 
-.status-type {
-  padding: 4px 7px;
+.status-id {
+  display: inline-block;
+  padding: 5px 8px;
   border: 1px solid #e7ecf2;
-  border-radius: 5px;
-  color: #8190a3;
-  font-size: 9px;
+  border-radius: 6px;
+  background: #f8fafd;
+  color: #607089;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+}
+
+.active-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background: #e9f7ef;
+  color: #39885e;
+  font-size: 10px;
+}
+
+.inactive-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background: #e9f7ef;
+  color: red;
+  font-size: 10px;
+}
+
+.active-label i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #48ae76;
+}
+
+.inactive-label i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: red;
+}
+.action-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .action-divider {
@@ -158,6 +235,14 @@
 
   .create-card {
     padding: 17px;
+  }
+
+  .status-form-actions {
+    justify-content: stretch !important;
+  }
+
+  .status-form-actions .btn {
+    flex: 1;
   }
 
   .status-list-card .table-toolbar {

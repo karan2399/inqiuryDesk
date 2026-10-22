@@ -96,6 +96,43 @@
   font-size: 11px;
 }
 
+.form-section + .form-section {
+  margin-top: 26px;
+}
+
+.form-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 17px;
+}
+
+.form-section-number {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border-radius: 9px;
+  background: #edf2ff;
+  color: #4564d0;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.form-section-heading h3 {
+  margin: 0 0 3px;
+  color: #34445b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.form-section-heading p {
+  margin: 0;
+  color: #8995a6;
+  font-size: 10px;
+}
+
 .required-mark {
   color: #df5f67;
 }
@@ -136,6 +173,94 @@
   margin-top: 6px;
   color: #929eae;
   font-size: 10px;
+}
+
+.tracking-details {
+  margin-top: 24px;
+  border: 1px solid #e9eef5;
+  border-radius: 9px;
+  background: #fbfcfe;
+}
+
+.tracking-details summary {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px 15px;
+  color: #40516a;
+  cursor: pointer;
+  list-style: none;
+}
+
+.tracking-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.tracking-details summary > span:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.tracking-details summary strong {
+  font-size: 11px;
+}
+
+.tracking-details summary small {
+  color: #8995a6;
+  font-size: 10px;
+}
+
+.tracking-toggle { color: #6478c7; font-size: 17px; }
+
+.tracking-fields {
+  margin: 0;
+  padding: 17px 15px 19px;
+  border-top: 1px solid #e9eef5;
+}
+
+.tracking-fields .form-control,
+.tracking-fields .form-select {
+  background-color: #fff;
+}
+
+.tracking-fields #enquiry-id {
+  background: #f1f4f8;
+}
+
+.conversion-control {
+  display: flex;
+  min-height: 43px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.conversion-control .form-label {
+  margin: 0;
+}
+
+.conversion-control .form-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 2.5em;
+  white-space: nowrap;
+}
+
+.conversion-control .form-check-input {
+  margin-top: 0;
+}
+
+.conversion-control .form-check-label {
+  color: #718096;
+  font-size: 11px;
+}
+
+.feedback-input {
+  min-height: 78px;
+  resize: vertical;
 }
 
 .inquiry-submit-row {

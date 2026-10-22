@@ -1,66 +1,66 @@
 <div class="admin-shell">
-  <aside class="admin-sidebar">
-    <a class="brand-lockup" routerLink="/home"><span class="brand-mark">in</span><span>inquiry<span class="brand-light">desk</span></span></a>
-    <div class="sidebar-label">Workspace</div>
-    <nav class="admin-nav" aria-label="Admin navigation">
-      <a routerLink="/enquiry-list"><span class="nav-icon">▤</span>Inquiries</a>
-      <a routerLink="/category"><span class="nav-icon">◈</span>Categories</a>
-      <a class="active" routerLink="/status"><span class="nav-icon">◷</span>Statuses</a>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="sidebar-user"><span class="user-avatar">JD</span><span>Jordan Davis<br><small>Administrator</small></span></div>
-    </div>
-  </aside>
+  <app-admin-sidebar></app-admin-sidebar>
 
   <div class="admin-main">
-    <header class="admin-topbar">
-      <span class="breadcrumb-label">Workspace&nbsp; / &nbsp;<strong>Statuses</strong></span>
-      <div class="topbar-right"><span>Thursday, October 22</span><span class="user-avatar">JD</span></div>
-    </header>
+    <app-admin-topbar section="Statuses"></app-admin-topbar>
     <main class="admin-content">
       <div class="page-heading">
-        <div><h1>Status master</h1><p>Track every inquiry from the first reply through resolution.</p></div>
-        <span class="master-count"><strong>4</strong> statuses</span>
+        <div><h1>Status master</h1><p>Manage the status names and active state used for inquiries.</p></div>
+        <span class="master-count"><strong>{{statusList().length}}</strong> statuses</span>
       </div>
 
       <section class="card-surface create-card">
         <div class="section-heading">
           <div class="section-icon">＋</div>
-          <div><h2>Create a status</h2><p>Add a status to reflect your team's inquiry workflow.</p></div>
+          <div><h2>Create a status</h2><p>Set the status name and choose whether it is active.</p></div>
         </div>
-        <form class="row g-3 align-items-end">
-          <div class="col-12 col-md-4">
-            <label class="form-label" for="status-name">Status name <span class="required-mark">*</span></label>
-            <input class="form-control" id="status-name" type="text" placeholder="e.g. Waiting on customer">
-          </div>
+        <form class="row g-3 align-items-end" [formGroup]="statusForm">
           <div class="col-12 col-md-5">
-            <label class="form-label" for="status-description">Description <span class="optional-note">(optional)</span></label>
-            <input class="form-control" id="status-description" type="text" placeholder="Describe when this status should be used">
+            <label class="form-label" for="status-name">Status name <span class="required-mark">*</span></label>
+            <input class="form-control" id="status-name" type="text"
+            formControlName="statusName" placeholder="e.g. Waiting on customer">
           </div>
-          <div class="col-12 col-md-3 d-flex gap-2">
-            <button class="btn btn-light flex-fill" type="button">Cancel</button>
-            <button class="btn btn-primary flex-fill" type="button">＋ Add status</button>
+          <div class="col-12 col-md-4">
+            <label class="form-label" for="status-active">Active status</label>
+            <div class="status-active-control">
+              <div class="form-check form-switch">
+                <input class="form-check-input" id="status-active" type="checkbox" role="switch"  formControlName="isActive">
+                <label class="form-check-label" for="status-active">Active</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 d-flex justify-content-end gap-2 status-form-actions">
+            <button class="btn btn-light" type="button" (click)="onResetForm()">Cancel</button>
+            @if(statusForm.controls['statusId'].value === 0){
+                  <button class="btn btn-primary" type="button" (click)="onSave()">＋ Add status</button>
+            }@else {
+               <button class="btn btn-primary" type="button" (click)="onUpdate()">＋ Update status</button>
+            }
+           
           </div>
         </form>
       </section>
 
       <section class="card-surface status-list-card">
         <div class="table-toolbar">
-          <div><h2>Inquiry statuses</h2><p>Update status labels used across your inquiry workspace.</p></div>
-          <span class="workflow-label"><span>●</span> Workflow order</span>
+          <div><h2>All statuses</h2><p>Status records and their availability.</p></div>
+          <span class="workflow-label">{{statusList().length}}</span>
         </div>
         <div class="table-responsive">
           <table class="table master-table">
-            <thead><tr><th>Status</th><th>Description</th><th>Inquiries</th><th>Type</th><th>Last updated</th><th>Actions</th></tr></thead>
+            <thead><tr><th>Status ID</th><th>Status name</th><th>Active status</th><th>Actions</th></tr></thead>
             <tbody>
-              <tr><td><span class="status-pill open">Open</span></td><td>New inquiry awaiting a response</td><td><strong class="inquiry-number">18</strong></td><td><span class="status-type">Default</span></td><td>Oct 20, 2025</td><td><a class="table-action" href="#">Edit</a><span class="action-divider">·</span><a class="table-action muted-action" href="#">Disable</a></td></tr>
-              <tr><td><span class="status-pill progress">In progress</span></td><td>A team member is working on the inquiry</td><td><strong class="inquiry-number">12</strong></td><td><span class="status-type">Default</span></td><td>Oct 18, 2025</td><td><a class="table-action" href="#">Edit</a><span class="action-divider">·</span><a class="table-action muted-action" href="#">Disable</a></td></tr>
-              <tr><td><span class="status-pill resolved">Resolved</span></td><td>The customer’s question has been answered</td><td><strong class="inquiry-number">176</strong></td><td><span class="status-type">Default</span></td><td>Oct 15, 2025</td><td><a class="table-action" href="#">Edit</a><span class="action-divider">·</span><a class="table-action muted-action" href="#">Disable</a></td></tr>
-              <tr><td><span class="status-pill closed">Closed</span></td><td>Conversation complete; no further action needed</td><td><strong class="inquiry-number">42</strong></td><td><span class="status-type">Default</span></td><td>Oct 12, 2025</td><td><a class="table-action" href="#">Edit</a><span class="action-divider">·</span><a class="table-action muted-action" href="#">Disable</a></td></tr>
+              @for(status of statusList();track status.statusId){
+              <tr><td><span class="status-id">{{status.statusId}}</span>
+              </td><td><strong class="status-name">{{status.statusName}}</strong>
+              </td><td><span [ngClass]="status.isActive ? 'active-label' : 'inactive-label' "><i></i> {{status.isActive ? "Active": "Inactive"}}</span>
+                </td><td><button class="table-action action-button" type="button" (click)="onEdit(status)">Edit</button><span class="action-divider">·</span><button class="table-action muted-action action-button" (click)="onDelete(status)" type="button">Delete</button></td></tr>
+              }
+             
             </tbody>
           </table>
         </div>
-        <div class="status-note"><span>ⓘ</span> Default statuses are part of your inquiry workflow and cannot be deleted. You can edit their display names.</div>
+        <div class="status-note"><span>ⓘ</span> Status ID, status name, and active state match the status record fields.</div>
       </section>
     </main>
   </div>

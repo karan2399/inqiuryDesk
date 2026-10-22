@@ -1,26 +1,12 @@
 <div class="admin-shell">
-  <aside class="admin-sidebar">
-    <a class="brand-lockup" routerLink="/home"><span class="brand-mark">in</span><span>inquiry<span class="brand-light">desk</span></span></a>
-    <div class="sidebar-label">Workspace</div>
-    <nav class="admin-nav" aria-label="Admin navigation">
-      <a routerLink="/enquiry-list"><span class="nav-icon">▤</span>Inquiries</a>
-      <a class="active" routerLink="/category"><span class="nav-icon">◈</span>Categories</a>
-      <a routerLink="/status"><span class="nav-icon">◷</span>Statuses</a>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="sidebar-user"><span class="user-avatar">JD</span><span>Jordan Davis<br><small>Administrator</small></span></div>
-    </div>
-  </aside>
+  <app-admin-sidebar></app-admin-sidebar>
 
   <div class="admin-main">
-    <header class="admin-topbar">
-      <span class="breadcrumb-label">Workspace&nbsp; / &nbsp;<strong>Categories</strong></span>
-      <div class="topbar-right"><span>Thursday, October 22</span><span class="user-avatar">JD</span></div>
-    </header>
+    <app-admin-topbar section="Categories"></app-admin-topbar>
     <main class="admin-content">
       <div class="page-heading">
         <div><h1>Category master</h1><p>Organize incoming inquiries so they reach the right team.</p></div>
-        <span class="master-count"><strong>1</strong> category</span>
+        <span class="master-count"><strong>{{categoryList().length}}</strong> categories</span>
       </div>
 
       <section class="card-surface create-card">
@@ -45,7 +31,12 @@
           </div>
           <div class="col-12 col-md-4 d-flex gap-2">
             <button class="btn btn-light flex-fill" type="button">Cancel</button>
-            <button class="btn btn-primary flex-fill" type="button" (click)="onSaveCategory()">＋ Add category</button>
+            @if(newCategoryObj.categoryId === 0){
+              <button class="btn btn-primary flex-fill" type="button" (click)="onSaveCategory()">＋ Add category</button>
+            }@else {
+            <button class="btn btn-warning flex-fill" type="button" (click)="onEdit(newCategoryObj)">＋ Update category</button>
+            }
+
           </div>
         </form>
       </section>
@@ -65,7 +56,12 @@
                 <td><span class="category-id">{{category.categoryId}}</span></td>
                 <td><strong class="category-name">{{category.categoryName}}</strong></td>
                 <td><span [ngClass]="category.isActive ? 'active-label' : 'inactive-label'" > {{category.isActive ?"Active": "Inactive"}}</span></td>
-                <td><button class="table-action action-button" type="button">Edit</button><span class="action-divider">·</span><button class="table-action muted-action action-button" type="button">Disable</button></td>
+                <td><button class="table-action action-button" type="button"
+                  (click)="onEdit(category)">Edit</button>
+
+                  <span class="action-divider"
+                 >·</span><button class="table-action muted-action action-button" type="button"
+                  (click)="onDeleteCategory(category.categoryId)">Delete</button></td>
               </tr>
                  }
             </tbody>

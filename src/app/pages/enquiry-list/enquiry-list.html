@@ -1,26 +1,12 @@
 <div class="admin-shell">
-  <aside class="admin-sidebar">
-    <a class="brand-lockup" routerLink="/home"><span class="brand-mark">in</span><span>inquiry<span class="brand-light">desk</span></span></a>
-    <div class="sidebar-label">Workspace</div>
-    <nav class="admin-nav" aria-label="Admin navigation">
-      <a class="active" routerLink="/enquiry-list"><span class="nav-icon">▤</span>Inquiries</a>
-      <a routerLink="/category"><span class="nav-icon">◈</span>Categories</a>
-      <a routerLink="/status"><span class="nav-icon">◷</span>Statuses</a>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="sidebar-user"><span class="user-avatar">JD</span><span>Jordan Davis<br><small>Administrator</small></span></div>
-    </div>
-  </aside>
+  <app-admin-sidebar></app-admin-sidebar>
 
   <div class="admin-main">
-    <header class="admin-topbar">
-      <span class="breadcrumb-label">Workspace&nbsp; / &nbsp;<strong>Inquiries</strong></span>
-      <div class="topbar-right"><span>Thursday, October 22</span><span class="user-avatar">JD</span></div>
-    </header>
+    <app-admin-topbar section="Inquiries"></app-admin-topbar>
     <main class="admin-content">
       <div class="page-heading">
         <div><h1>Inquiries</h1><p>Review and manage messages from your customers.</p></div>
-        <a class="btn btn-light" href="/home">↗&nbsp; View customer form</a>
+        <a class="btn btn-light" routerLink="/home">↗&nbsp; View customer form</a>
       </div>
 
       <div class="row g-3 mb-4">
