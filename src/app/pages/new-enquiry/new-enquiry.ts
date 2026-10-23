@@ -42,7 +42,7 @@ export class NewEnquiry {
       "customerPhone": "",
       "message": "",
       "categoryId": "",
-      "statusId": "",
+      "statusId": Math.floor(Math.random() * 1000),
       "enquiryType": "",
       "isConverted": true,
       "enquiryDate": new Date(),
@@ -55,7 +55,7 @@ export class NewEnquiry {
 
   onSaveInquiry(){
     const formValue = this.inqiryForm().value;
-    this.inquiryService.saveNewEnquiery(formValue).subscribe({
+    this.inquiryService.saveNewEnquiery(formValue()).subscribe({
       next:(res)=>{
         if(!!res){
           alert("Inquiery Received");

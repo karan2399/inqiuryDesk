@@ -10,7 +10,7 @@
       </div>
 
       <div class="row g-3 mb-4">
-        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-blue">▤</span><div><span class="metric-label">Total inquiries</span><strong>248</strong></div><span class="metric-note">All time</span></div></div>
+        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-blue">▤</span><div><span class="metric-label">Total inquiries</span><strong>{{inquiryList().length}}</strong></div><span class="metric-note">All time</span></div></div>
         <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-amber">◷</span><div><span class="metric-label">Needs attention</span><strong>18</strong></div><span class="metric-note">Open</span></div></div>
         <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-violet">◌</span><div><span class="metric-label">In progress</span><strong>12</strong></div><span class="metric-note">Being handled</span></div></div>
         <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-green">✓</span><div><span class="metric-label">Resolved</span><strong>218</strong></div><span class="metric-note">87.9% of total</span></div></div>
@@ -23,20 +23,29 @@
         </div>
         <div class="filter-row row g-2">
           <div class="col-12 col-lg-5"><div class="search-box"><span>⌕</span><input type="search" aria-label="Search inquiries" placeholder="Search by name, subject or email"></div></div>
-          <div class="col-6 col-lg-3"><select class="form-select" aria-label="Filter by category"><option>All categories</option><option>Billing &amp; payments</option><option>Product support</option><option>Account &amp; access</option></select></div>
-          <div class="col-6 col-lg-2"><select class="form-select" aria-label="Filter by status"><option>All statuses</option><option>Open</option><option>In progress</option><option>Resolved</option></select></div>
+          <div class="col-6 col-lg-3"><select class="form-select" aria-label="Filter by category">
+            @for(category of categoryList(); track category.categoryId){
+              <option>{{category.categoryName}}</option>
+            } 
+          </select>
+          </div>
+          <div class="col-6 col-lg-2"><select class="form-select" aria-label="Filter by status">
+              @for(status of statusList(); track status.statusId){
+                  <option>{{status.statusName}}</option>
+            } 
+          </select>
+          </div>
+        
           <div class="col-12 col-lg-2"><button class="btn btn-light filter-button" type="button">More filters <span>⌄</span></button></div>
         </div>
         <div class="table-responsive">
           <table class="table inquiry-table">
             <thead><tr><th>Customer</th><th>Subject</th><th>Category</th><th>Received</th><th>Status</th><th>Action</th></tr></thead>
             <tbody>
-              <tr><td><strong>Olivia Rhye</strong><small>olivia.rhye@email.com</small></td><td>Unable to update billing details</td><td>Billing</td><td>Oct 22, 2025</td><td><span class="status-pill open">Open</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
-              <tr><td><strong>Phoenix Baker</strong><small>phoenix.b@email.com</small></td><td>Login code never arrived</td><td>Account</td><td>Oct 22, 2025</td><td><span class="status-pill progress">In progress</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
-              <tr><td><strong>Lana Steiner</strong><small>lana.steiner@email.com</small></td><td>Question about my recent order</td><td>General</td><td>Oct 21, 2025</td><td><span class="status-pill open">Open</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
-              <tr><td><strong>Demi Wilkinson</strong><small>demi.w@email.com</small></td><td>Feature request: team notifications</td><td>Product</td><td>Oct 21, 2025</td><td><span class="status-pill resolved">Resolved</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
-              <tr><td><strong>Candice Wu</strong><small>candice.wu@email.com</small></td><td>Refund for duplicate payment</td><td>Billing</td><td>Oct 20, 2025</td><td><span class="status-pill progress">In progress</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
-              <tr><td><strong>Natali Craig</strong><small>natali.c@email.com</small></td><td>How do I change my account email?</td><td>Account</td><td>Oct 20, 2025</td><td><span class="status-pill closed">Closed</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              @for(inquiry of inquiryList(); track inquiry){
+                <tr><td><strong>{{inquiry.customerName}}</strong><small>{{inquiry.customerEmail}}</small></td><td>{{inquiry.message}}</td><td>{{inquiry.categoryId}}</td>
+                  <td>{{inquiry.enquiryDate}}</td><td><span class="status-pill open">{{inquiry.statusId}}</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              }
             </tbody>
           </table>
         </div>
