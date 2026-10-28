@@ -9,7 +9,7 @@ import { authGuard } from './guards/auth/auth-guard';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'home',
+        redirectTo: 'login',
         pathMatch: 'full',
     },
     {
@@ -20,7 +20,6 @@ export const routes: Routes = [
      {
         path: 'new-inquiry',
         component: NewEnquiry,
-        canActivate:[authGuard]
     },
      {
         path: 'login',
