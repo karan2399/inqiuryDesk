@@ -1,0 +1,198 @@
+<div class="admin-shell">
+  <app-admin-sidebar></app-admin-sidebar>
+
+  <div class="admin-main">
+    <app-admin-topbar section="Inquiry details"></app-admin-topbar>
+    <main class="admin-content">
+      <a class="back-link" routerLink="/enquiry-list">← Back to inquiries</a>
+
+      @if (loading()) {
+        <div class="card-surface state-card" role="status">Loading inquiry details…</div>
+      } @else if (errorMessage()) {
+        <div class="card-surface state-card error-state" role="alert">
+          <h1>Inquiry unavailable</h1>
+          <p>{{ errorMessage() }}</p>
+          <a class="btn btn-primary" routerLink="/enquiry-list">Return to inquiries</a>
+        </div>
+      } @else if (enquiry(); as item) {
+        <div class="page-heading detail-heading">
+          <div>
+            <span class="eyebrow">INQUIRY #{{ item.enquiryId }}</span>
+            <h1>{{ item.enquiryType || 'Inquiry details' }}</h1>
+            <p>Received {{ item.enquiryDate | date:'MMMM d, y' }}</p>
+          </div>
+          <div class="heading-actions">
+            @if (editing()) {
+              <button class="btn btn-light" type="button" (click)="cancelEditing()" [disabled]="saving()">Cancel</button>
+              <button class="btn btn-primary" type="submit" form="edit-inquiry-form" [disabled]="saving()">
+                {{ saving() ? 'Saving…' : 'Save changes' }}
+              </button>
+            } @else {
+              <span class="status-pill" [ngClass]="statusClass()">
+                {{ statusName() || 'Status #' + item.statusId }}
+              </span>
+              <button class="btn btn-primary" type="button" (click)="startEditing()">Edit inquiry</button>
+            }
+          </div>
+        </div>
+
+        @if (lookupError()) {
+          <p class="lookup-warning" role="status">{{ lookupError() }}</p>
+        }
+
+        @if (saveSuccess()) {
+          <p class="save-message success-message" role="status">{{ saveSuccess() }}</p>
+        }
+        @if (saveError()) {
+          <p class="save-message error-message" role="alert">{{ saveError() }}</p>
+        }
+
+        <form id="edit-inquiry-form" (ngSubmit)="saveChanges()">
+        <div class="row g-3">
+          <section class="col-12 col-lg-7">
+            <article class="card-surface detail-card">
+              <div class="section-heading">
+                <span class="section-icon">▤</span>
+                <div><h2>{{ editing() ? 'Edit inquiry' : 'Customer message' }}</h2><p>Inquiry information and request details</p></div>
+              </div>
+
+              @if (editing()) {
+                @if (draft(); as form) {
+                  <div class="edit-fields">
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-category">Category</label>
+                      <select id="edit-category" class="form-select" [ngModel]="form.categoryId" (ngModelChange)="updateDraft('categoryId', +$event)" name="categoryId" required>
+                        @for (category of categories(); track category.categoryId) {
+                          <option [ngValue]="category.categoryId">{{ category.categoryName }}</option>
+                        }
+                        @if (!categoryName()) {
+                          <option [ngValue]="form.categoryId">Category #{{ form.categoryId }}</option>
+                        }
+                      </select>
+                    </div>
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-enquiry-type">Inquiry type</label>
+                      <input id="edit-enquiry-type" class="form-control" [ngModel]="form.enquiryType" (ngModelChange)="updateDraft('enquiryType', $event)" name="enquiryType">
+                    </div>
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-status">Status</label>
+                      <select id="edit-status" class="form-select" [ngModel]="form.statusId" (ngModelChange)="updateDraft('statusId', +$event)" name="statusId" required>
+                        @for (status of statuses(); track status.statusId) {
+                          <option [ngValue]="status.statusId">{{ status.statusName }}</option>
+                        }
+                        @if (!statusName()) {
+                          <option [ngValue]="form.statusId">Status #{{ form.statusId }}</option>
+                        }
+                      </select>
+                    </div>
+                    <div class="detail-field full-width">
+                      <label class="detail-label" for="edit-message">Message</label>
+                      <textarea id="edit-message" class="form-control edit-message" [ngModel]="form.message" (ngModelChange)="updateDraft('message', $event)" name="message" rows="5"></textarea>
+                    </div>
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-enquiry-date">Received</label>
+                      <input id="edit-enquiry-date" type="datetime-local" class="form-control" [ngModel]="toDateTimeLocal(form.enquiryDate)" (ngModelChange)="updateDateTime('enquiryDate', $event)" name="enquiryDate" required>
+                    </div>
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-follow-up-date">Follow-up date</label>
+                      <input id="edit-follow-up-date" type="datetime-local" class="form-control" [ngModel]="toDateTimeLocal(form.followUpDate)" (ngModelChange)="updateDateTime('followUpDate', $event)" name="followUpDate" required>
+                    </div>
+                    <label class="conversion-control">
+                      <input type="checkbox" class="form-check-input" [ngModel]="form.isConverted" (ngModelChange)="updateDraft('isConverted', $event)" name="isConverted">
+                      <span>Inquiry converted</span>
+                    </label>
+                  </div>
+                }
+              } @else {
+                <div class="detail-grid">
+                  <div class="detail-field">
+                    <span class="detail-label">Category</span>
+                    <strong>{{ categoryName() || 'Category #' + item.categoryId }}</strong>
+                  </div>
+                  <div class="detail-field">
+                    <span class="detail-label">Inquiry type</span>
+                    <strong>{{ item.enquiryType || '—' }}</strong>
+                  </div>
+                </div>
+                <div class="message-block">
+                  <span class="detail-label">Message</span>
+                  <p>{{ item.message || 'No message provided.' }}</p>
+                </div>
+                <div class="detail-grid follow-up-grid">
+                  <div class="detail-field">
+                    <span class="detail-label">Received</span>
+                    <strong>{{ item.enquiryDate | date:'MMMM d, y, h:mm a' }}</strong>
+                  </div>
+                  <div class="detail-field">
+                    <span class="detail-label">Follow-up date</span>
+                    <strong>{{ item.followUpDate | date:'MMMM d, y' }}</strong>
+                  </div>
+                </div>
+                <div class="conversion-row">
+                  <span class="detail-label">Converted</span>
+                  <span [class.conversion-yes]="item.isConverted" [class.conversion-no]="!item.isConverted">
+                    {{ item.isConverted ? 'Yes' : 'No' }}
+                  </span>
+                </div>
+              }
+            </article>
+          </section>
+
+          <section class="col-12 col-lg-5">
+            <article class="card-surface detail-card customer-card">
+              <div class="section-heading">
+                <span class="section-icon customer-icon">◎</span>
+                <div><h2>Customer details</h2><p>Contact information for this inquiry</p></div>
+              </div>
+              @if (editing()) {
+                @if (draft(); as form) {
+                  <div class="edit-fields customer-edit-fields">
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-customer-name">Customer name</label>
+                      <input id="edit-customer-name" class="form-control" [ngModel]="form.customerName" (ngModelChange)="updateDraft('customerName', $event)" name="customerName" required>
+                    </div>
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-customer-email">Email</label>
+                      <input id="edit-customer-email" type="email" class="form-control" [ngModel]="form.customerEmail" (ngModelChange)="updateDraft('customerEmail', $event)" name="customerEmail" required>
+                    </div>
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-customer-phone">Phone</label>
+                      <input id="edit-customer-phone" type="tel" class="form-control" [ngModel]="form.customerPhone" (ngModelChange)="updateDraft('customerPhone', $event)" name="customerPhone">
+                    </div>
+                    <div class="detail-field">
+                      <label class="detail-label" for="edit-feedback">Feedback</label>
+                      <textarea id="edit-feedback" class="form-control" [ngModel]="form.feedback" (ngModelChange)="updateDraft('feedback', $event)" name="feedback" rows="4"></textarea>
+                    </div>
+                  </div>
+                }
+              } @else {
+                <div class="customer-name">{{ item.customerName || 'Unknown customer' }}</div>
+                <div class="contact-list">
+                  <div class="contact-item">
+                    <span class="contact-icon">✉</span>
+                    <div><span class="detail-label">Email</span><a [href]="'mailto:' + item.customerEmail">{{ item.customerEmail || '—' }}</a></div>
+                  </div>
+                  <div class="contact-item">
+                    <span class="contact-icon">⌕</span>
+                    <div><span class="detail-label">Phone</span>
+                      @if (item.customerPhone) {
+                        <a [href]="'tel:' + item.customerPhone">{{ item.customerPhone }}</a>
+                      } @else {
+                        <strong>—</strong>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div class="feedback-block">
+                  <span class="detail-label">Feedback</span>
+                  <p>{{ item.feedback || 'No feedback has been recorded.' }}</p>
+                </div>
+              }
+            </article>
+          </section>
+        </div>
+        </form>
+      }
+    </main>
+  </div>
+</div>

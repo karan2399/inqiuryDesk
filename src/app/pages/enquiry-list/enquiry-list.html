@@ -5,54 +5,118 @@
     <app-admin-topbar section="Inquiries"></app-admin-topbar>
     <main class="admin-content">
       <div class="page-heading">
-        <div><h1>Inquiries</h1><p>Review and manage messages from your customers.</p></div>
+        <div>
+          <h1>Inquiries</h1>
+          <p>Review and manage messages from your customers.</p>
+        </div>
         <a class="btn btn-light" routerLink="/new-inquiry">↗&nbsp; View customer form</a>
       </div>
 
       <div class="row g-3 mb-4">
-        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-blue">▤</span><div><span class="metric-label">Total inquiries</span><strong>{{inquiryList().length}}</strong></div><span class="metric-note">All time</span></div></div>
-        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-amber">◷</span><div><span class="metric-label">Needs attention</span><strong>18</strong></div><span class="metric-note">Open</span></div></div>
-        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-violet">◌</span><div><span class="metric-label">In progress</span><strong>12</strong></div><span class="metric-note">Being handled</span></div></div>
-        <div class="col-12 col-sm-6 col-xl-3"><div class="metric-card"><span class="metric-icon icon-green">✓</span><div><span class="metric-label">Resolved</span><strong>218</strong></div><span class="metric-note">87.9% of total</span></div></div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="metric-card"><span class="metric-icon icon-blue">▤</span>
+            <div><span class="metric-label">Total inquiries</span><strong>{{inquiryList().length}}</strong></div><span
+              class="metric-note">All time</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="metric-card"><span class="metric-icon icon-amber">◷</span>
+            <div><span class="metric-label">In Progress</span><strong>{{ countForStatus('In Progress') }}</strong></div>
+            <span class="metric-note">Open</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="metric-card"><span class="metric-icon icon-violet">◌</span>
+            <div><span class="metric-label">New</span><strong>{{ countForStatus('New') }}</strong></div><span
+              class="metric-note">New</span>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="metric-card"><span class="metric-icon icon-green">✓</span>
+            <div><span class="metric-label">Resolved</span><strong>{{ countForStatus('Resolved') }}</strong></div><span
+              class="metric-note">{{ (100 * countForStatus('Resolved') )/ inquiryList().length }}% of total</span>
+          </div>
+        </div>
       </div>
 
       <section class="card-surface inquiry-table-card">
         <div class="table-toolbar">
-          <div><h2>All inquiries</h2><p>Browse and update customer requests.</p></div>
+          <div>
+            <h2>All inquiries</h2>
+            <p>Browse and update customer requests.</p>
+          </div>
           <span class="record-count">{{inquiryList().length}} records</span>
         </div>
         <div class="filter-row row g-2">
-          <div class="col-12 col-lg-5"><div class="search-box"><span>⌕</span><input type="search" aria-label="Search inquiries" placeholder="Search by name, subject or email"></div></div>
+          <div class="col-12 col-lg-5">
+            <div class="search-box"><span>⌕</span><input type="search" aria-label="Search inquiries"
+                placeholder="Search by name, subject or email"></div>
+          </div>
           <div class="col-6 col-lg-3">
             <select class="form-select" aria-label="Filter by category">
-            @for(category of categoryList(); track category.categoryId){
+              @for(category of categoryList(); track category.categoryId){
               <option>{{category.categoryName}}</option>
-            } 
-          </select>
+              }
+            </select>
           </div>
           <div class="col-6 col-lg-2">
             <select class="form-select" aria-label="Filter by status" (change)="changeStatus($event)">
               <option value="">All</option>
               @for(status of statusList(); track status.statusId){
-                  <option>{{status.statusName}}</option>
-            } 
-          </select>
+              <option>{{status.statusName}}</option>
+              }
+            </select>
           </div>
-        
-          <div class="col-12 col-lg-2"><button class="btn btn-light filter-button" type="button">More filters <span>⌄</span></button></div>
+
+          <div class="col-12 col-lg-2"><button class="btn btn-light filter-button" type="button">More filters
+              <span>⌄</span></button></div>
         </div>
         <div class="table-responsive">
           <table class="table inquiry-table">
-            <thead><tr><th>Customer</th><th>Subject</th><th>Category</th><th>Received</th><th>Status</th><th>Action</th></tr></thead>
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Subject</th>
+                <th>Category</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
             <tbody>
-              @for(inquiry of filteredInquiries(); track inquiry){
-                <tr><td><strong>{{inquiry.customerName}}</strong><small>{{inquiry.customerEmail}}</small></td><td>{{inquiry.message}}</td><td>{{inquiry.categoryId}}</td>
-                  <td>{{inquiry.enquiryDate}}</td><td><span class="status-pill open">{{inquiry.statusName}}</span></td><td><a class="table-action" href="#">View&nbsp; →</a></td></tr>
+              @for (inquiry of paginatedInquiries(); track inquiry.enquiryId) {
+              <tr>
+                <td><strong>{{inquiry.customerName}}</strong><small>{{inquiry.customerEmail}}</small></td>
+                <td>{{inquiry.message}}</td>
+                <td>{{inquiry.categoryName}}</td>
+                <td>{{inquiry.enquiryDate | date}}</td>
+                <td><span class="status-pill open">{{inquiry.statusName}}</span></td>
+                <td><a class="table-action" [routerLink]="['/enquiry', inquiry.enquiryId]">View&nbsp; →</a></td>
+              </tr>
               }
             </tbody>
           </table>
         </div>
-        <div class="table-pagination"><span>Showing <strong>1–6</strong> of <strong>248</strong> inquiries</span><div><button type="button" class="btn btn-light" aria-label="Previous page">←</button><button type="button" class="btn btn-light current-page">1</button><button type="button" class="btn btn-light">2</button><button type="button" class="btn btn-light">3</button><span class="pagination-dots">…</span><button type="button" class="btn btn-light">42</button><button type="button" class="btn btn-light" aria-label="Next page">→</button></div></div>
+        <div class="table-pagination">
+          <span>
+            Showing <strong>{{ showingStart() }}–{{ showingEnd() }}</strong>
+            of <strong>{{ filteredInquiries().length }}</strong> inquiries
+          </span>
+
+          <div>
+            <button type="button" class="btn btn-light" aria-label="Previous page" [disabled]="currentPage() === 1"
+              (click)="goToPage(currentPage() - 1)">
+              ←
+            </button>
+
+            <span>Page {{ currentPage() }} of {{ pageCount() }}</span>
+
+            <button type="button" class="btn btn-light" aria-label="Next page"
+              [disabled]="currentPage() === pageCount()" (click)="goToPage(currentPage() + 1)">
+              →
+            </button>
+          </div>
+        </div>
       </section>
     </main>
   </div>

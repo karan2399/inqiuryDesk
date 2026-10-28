@@ -3,6 +3,7 @@ import { NewEnquiry } from './pages/new-enquiry/new-enquiry';
 import { StatusMaster } from './pages/status-master/status-master';
 import { CategoryMaster } from './pages/category-master/category-master';
 import { EnquiryList } from './pages/enquiry-list/enquiry-list';
+import { EnquiryDetail } from './pages/enquiry-detail/enquiry-detail';
 import { Login } from './pages/login/login';
 import { authGuard } from './guards/auth/auth-guard';
 
@@ -33,6 +34,11 @@ export const routes: Routes = [
     {
         path: 'enquiry-list',
         component: EnquiryList,
+        canActivate:[authGuard]
+    },
+    {
+        path: 'enquiry/:id',
+        component: EnquiryDetail,
         canActivate:[authGuard]
     },
     {
