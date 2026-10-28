@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AdminTopbar } from '../../shared/admin-topbar/admin-topbar';
 import { AdminSidebar } from '../../shared/admin-sidebar/admin-sidebar';
@@ -18,6 +18,7 @@ export class EnquiryList {
   inquiryService = inject(EnquiryService);
   categoryService =inject(CategoryService);
   statusService =inject(Status);
+  selectedStatus = signal('');
 
 
   inquiryList = signal<any[]>([]);
@@ -63,4 +64,18 @@ export class EnquiryList {
           }
       })  
   }
+
+
+  changeStatus(event: Event) {
+    this.selectedStatus.set((event.target as HTMLSelectElement).value);
+  }
+
+  filteredInquiries = computed(() => {
+  const status = this.selectedStatus();
+  const inquiries = this.inquiryList();
+
+  return status
+    ? inquiries.filter(inquiry => inquiry.statusName === status)
+    : inquiries;
+  });
 }

@@ -65,10 +65,15 @@ export class CategoryMaster {
     })
   }
 
-  onEdit(category: ICategory) {
+
+
+  onEdit(category: ICategory){
     const stringObj = JSON.stringify(category);
     const obj = JSON.parse(stringObj)
     this.newCategoryObj = obj;
+  }
+  onUpdate(category: ICategory) {
+  
     this.http.put("https://api.freeprojectapi.com/api/Enquiry/update-category/" + category.categoryId, this.newCategoryObj).subscribe({
       next: (res: any) => {
         if (!!res.result) {

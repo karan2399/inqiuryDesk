@@ -16,7 +16,7 @@ export class NewEnquiry {
 
   categoryService =  inject(CategoryService);
   inquieryService = inject(EnquiryService);
-   categoryList = signal<ICategory[]>([]);
+  categoryList = signal<ICategory[]>([]);
 
   ngOnInit(){
       this.loadCategories();

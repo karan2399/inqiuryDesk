@@ -1,0 +1,24 @@
+<aside class="admin-sidebar">
+  <a class="brand-lockup" routerLink="/home">
+    <span class="brand-mark">in</span>
+    <span>inquiry<span class="brand-light">desk</span></span>
+  </a>
+  <div class="sidebar-label">Workspace</div>
+  <nav class="admin-nav" aria-label="Admin navigation">
+    <a routerLink="/enquiry-list" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="nav-icon">▤</span>Inquiries
+    </a>
+    <a routerLink="/category" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="nav-icon">◈</span>Categories
+    </a>
+    <a routerLink="/status" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      <span class="nav-icon">◷</span>Statuses
+    </a>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-user">
+      <span class="user-avatar">AA</span>
+      <span>Admin<br><small>Administrator</small></span>
+    </div>
+  </div>
+</aside>

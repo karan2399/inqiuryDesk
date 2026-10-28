@@ -1,1 +1,367 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  color-scheme: light;
+  --ink: #192b45;
+  --muted: #718096;
+  --line: #e7edf4;
+  --canvas: #f5f8fc;
+  --blue: #315ee8;
+  --blue-dark: #2348c7;
+  --mint: #e9f8f1;
+  --navy: #14233b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.admin-shell {
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10;
+  display: flex;
+  width: 248px;
+  flex-direction: column;
+  padding: 26px 16px 20px;
+  background: var(--navy);
+  color: #d9e1ee;
+}
+
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 8px 39px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.4px;
+}
+
+.brand-mark {
+  display: inline-grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border-radius: 11px;
+  background: #4269ed;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.sidebar-label {
+  margin: 0 10px 11px;
+  color: #8493a9;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.admin-nav {
+  display: grid;
+  gap: 5px;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 9px;
+  color: #b7c4d7;
+  font-size: 13px;
+  font-weight: 550;
+}
+
+.admin-nav a:hover,
+.admin-nav a.active {
+  background: #263955;
+  color: #fff;
+}
+
+.nav-icon {
+  width: 19px;
+  color: #91a5c0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.admin-nav a.active .nav-icon {
+  color: #9fb4ff;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 15px 10px 0;
+  border-top: 1px solid #293a54;
+  color: #9dacc0;
+  font-size: 12px;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.user-avatar {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: #dce6ff;
+  color: #3153b8;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.admin-main {
+  min-height: 100vh;
+  margin-left: 248px;
+}
+
+.admin-topbar {
+  display: flex;
+  min-height: 69px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38px;
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.breadcrumb-label {
+  color: #8491a4;
+  font-size: 12px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  color: #6a778a;
+  font-size: 12px;
+}
+
+.admin-content {
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 34px 38px 54px;
+}
+
+.page-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.page-heading h1 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: clamp(22px, 2.1vw, 28px);
+  font-weight: 700;
+  letter-spacing: -.8px;
+}
+
+.page-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.card-surface {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgb(29 49 79 / 3%);
+}
+
+.form-label {
+  margin-bottom: 7px;
+  color: #34445b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.form-control,
+.form-select {
+  min-height: 43px;
+  border-color: #dfe6ef;
+  border-radius: 7px;
+  color: var(--ink);
+  font-size: 13px;
+  box-shadow: none;
+}
+
+.form-control::placeholder {
+  color: #a3adbb;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #91a9fa;
+  box-shadow: 0 0 0 3px rgb(49 94 232 / 10%);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--blue);
+  --bs-btn-border-color: var(--blue);
+  --bs-btn-hover-bg: var(--blue-dark);
+  --bs-btn-hover-border-color: var(--blue-dark);
+  --bs-btn-active-bg: var(--blue-dark);
+  --bs-btn-active-border-color: var(--blue-dark);
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn-light {
+  border: 1px solid #dfe6ef;
+  border-radius: 7px;
+  background: #fff;
+  color: #40516a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.table {
+  --bs-table-bg: transparent;
+  margin-bottom: 0;
+  color: #35465d;
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.table > :not(caption) > * > * {
+  padding: 14px 17px;
+  border-bottom-color: #edf1f6;
+}
+
+.table thead th {
+  background: #f8fafd;
+  color: #77859a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .55px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #edf2ff;
+  color: #3e5ec4;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-pill.open {
+  background: #fff4dd;
+  color: #a76a00;
+}
+
+.status-pill.progress {
+  background: #eaf1ff;
+  color: #4165c8;
+}
+
+.status-pill.resolved {
+  background: #e7f7ee;
+  color: #278452;
+}
+
+.status-pill.closed {
+  background: #eff1f4;
+  color: #687588;
+}
+
+.table-action {
+  color: #62738a;
+  font-weight: 600;
+}
+
+@media (max-width: 767.98px) {
+  .admin-sidebar {
+    position: static;
+    width: auto;
+    padding: 15px 16px 12px;
+  }
+
+  .brand-lockup {
+    margin: 0 4px 15px;
+  }
+
+  .sidebar-label,
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .admin-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .admin-nav a {
+    justify-content: center;
+    gap: 7px;
+    min-height: 39px;
+    padding: 0 6px;
+    font-size: 11px;
+  }
+
+  .nav-icon {
+    width: auto;
+  }
+
+  .admin-main {
+    margin-left: 0;
+  }
+
+  .admin-topbar {
+    min-height: 54px;
+    padding: 0 19px;
+  }
+
+  .admin-content {
+    padding: 25px 18px 40px;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-nav a {
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 3px;
+  }
+}
